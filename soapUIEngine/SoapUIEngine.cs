@@ -404,11 +404,20 @@ namespace Inflectra.RemoteLaunch.Engines.soapUI
                                 switch (status)
                                 {
                                     case "OK":
+                                    case "PASS":
                                         testRunStep.ExecutionStatusId = (int)AutomatedTestRun4.TestStatusEnum.Passed;
                                         break;
 
-                                    default:
+                                    case "FAIL":
                                         testRunStep.ExecutionStatusId = (int)AutomatedTestRun4.TestStatusEnum.Failed;
+                                        break;
+
+                                    case "UNKNOWN":
+                                        testRunStep.ExecutionStatusId = (int)AutomatedTestRun4.TestStatusEnum.NotApplicable;
+                                        break;
+
+                                    default:
+                                        testRunStep.ExecutionStatusId = (int)AutomatedTestRun4.TestStatusEnum.NotRun;
                                         errorFound = true;
                                         break;
                                 }
